@@ -8,6 +8,7 @@ import java.util.ArrayList;
 public class Service {
     private static String dbID = "review_board";
     private static String dbPW = "review";
+
     public static void main(String[] args) {
         while (true) {
             System.out.println("\n<< 카페 메뉴 관리 프로그램 >>");
@@ -16,8 +17,9 @@ public class Service {
             System.out.println("3. 글 내용 보기 (글 번호)");
             System.out.println("4. 글 삭제 (글 번호)");
             System.out.println("5. 글 수정 (글 번호)");
+            System.out.println("6. 글 검색 (작성자 or 글 제목)");
             System.out.println("0. 프로그램 종료");
-            int menu = Input._integer_(0, 5);
+            int menu = Input._integer_(0, 6);
 
             if (menu == 1) { // 글 작성
                 ReviewBoardDAO boardDAO = new ReviewBoardDAO(dbID, dbPW);
@@ -82,7 +84,7 @@ public class Service {
                 System.out.println("제목 : Post_title");
                 System.out.println("내용 : Post_cont");
                 String rePortCol = Input._string_(
-                        "POSTER","POST_TITLE","POST_CONT",
+                        "POSTER", "POST_TITLE", "POST_CONT",
                         "poster", "post_title", "post_cont",
                         "Poster", "Post_title", "Post_cont");
 
@@ -90,13 +92,13 @@ public class Service {
 
                 String rePostCon = "";
 
-                if(rePortCol.equals("POST_CONT")||rePortCol.equals("post_cont")||rePortCol.equals("Post_cont")) {
+                if (rePortCol.equals("POST_CONT") || rePortCol.equals("post_cont") || rePortCol.equals("Post_cont")) {
                     System.out.println("수정 내용 입력(최대 500글자)");
                     rePostCon = Input._string_(500);
-                }else if(rePortCol.equals("POST_TITLE")||rePortCol.equals("post_title")||rePortCol.equals("Post_title")) {
+                } else if (rePortCol.equals("POST_TITLE") || rePortCol.equals("post_title") || rePortCol.equals("Post_title")) {
                     System.out.println("수정 제목 입력(최대 30글자)");
                     rePostCon = Input._string_(30);
-                }else{
+                } else {
                     System.out.println("수정 작성자 입력(최대 10글자)");
                     rePostCon = Input._string_(10);
                 }
@@ -114,6 +116,23 @@ public class Service {
                 } else {
                     System.out.println("수정 대상이 없습니다.");
                 }
+            } else if (menu == 6) {
+                ReviewBoardDAO reviewBoardDAO = new ReviewBoardDAO(dbID, dbPW);
+
+                System.out.println("Search 대상을 입력하세요.(작성자와 게시글 제목에서 검색합니다.)");
+                String searchText = Input._string_(30);
+                ArrayList<Integer> postNoArr = reviewBoardDAO.search(searchText);
+
+                if(postNoArr.size() != 0) {
+                    System.out.println("글 번호 \t: 작성자 \t: 글 제목 \t: 작성 시간");
+                    for (int findPostNo : postNoArr) {
+                        System.out.println(reviewBoardDAO.select(findPostNo).get(0));
+                    }
+                }
+                else{
+                    System.out.println("검색 대상이 없습니다.");
+                }
+
             } else {
                 System.out.println("프로그램을 종료합니다.");
                 System.exit(0);
@@ -139,8 +158,7 @@ public class Service {
         ArrayList<String> result = boardDAO.select(findPostNo);
         if (result == null) {
             System.out.println("글 번호를 잘못 입력하셨습니다.");
-        }
-        else {
+        } else {
             System.out.println("글 번호 \t: 작성자 \t: 글 제목 \t: 작성 시간");
             System.out.println(result.get(0));
             System.out.println("vv 글 내용 vv");

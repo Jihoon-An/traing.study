@@ -119,7 +119,7 @@ public class ReviewBoardDAO {
             int postNo = result.getInt("POST_NO");
             String poster = result.getString("POSTER");
             String postTitle = result.getString("POST_TITLE");
-            Timestamp postTimeDate  = result.getTimestamp("timestamp(POST_TIME)");
+            Timestamp postTimeDate  = result.getTimestamp("POST_TIME");
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy년 MM월 dd일 hh시 mm분");
             String postTime = simpleDateFormat.format(postTimeDate);
 
@@ -183,4 +183,33 @@ public class ReviewBoardDAO {
             return 0;
         }
     }
+
+    public ArrayList<Integer> search(String searchText){
+        try {
+            Class.forName("oracle.jdbc.driver.OracleDriver");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+            System.exit(0);
+        }
+        String sql = "select POST_NO from review_board where (POST_TITLE = ?) or (POSTER = ?) order by 1";
+        ArrayList<Integer> outStr = new ArrayList<>();
+        try (
+                Connection con = DriverManager.getConnection(dbURL, dbID, dbPW);
+        ) {
+            PreparedStatement statement = con.prepareStatement(sql);
+            statement.setString(1, searchText);
+            statement.setString(2, searchText);
+            ResultSet result = statement.executeQuery();
+
+            while (result.next()) {
+                int postNo = result.getInt("POST_NO");
+                outStr.add(postNo);
+            }
+            return outStr;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
 }
