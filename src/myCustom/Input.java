@@ -72,4 +72,17 @@ public class Input {
             }
         }
     }
+
+    public static String _string_(int filter) {
+        while (true) {
+            String inputString = _string_();
+            boolean success = false;
+            if(filter > inputString.length()) {
+                return inputString;
+            }
+            else {
+                System.out.println("지정값 보다 긴 입력입니니다, 짧게 다시 입력하세요.");
+            }
+        }
+    }
 }
