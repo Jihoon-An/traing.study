@@ -40,6 +40,7 @@ public class Service {
                 outPostList();
 
             } else if (menu == 3) { // 글 읽기
+                System.out.println("읽을 게시글의 POST_NO을 입력하세요.");
                 int findPostNo = Input._integer_();
                 outPost(findPostNo);
 
