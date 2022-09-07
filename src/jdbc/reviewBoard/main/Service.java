@@ -19,6 +19,14 @@ public class Service {
             System.exit(0);
         }
 
+        System.out.println("-------------------------메뉴얼-------------------------");
+        System.out.println("1. 각 메뉴에서 0을 입력하면 메인 메뉴로 돌아갑니다.");
+        System.out.println("2. 메뉴는 0~6까지의 메뉴가 있으며 그 외의 숫자는 입력받지 않습니다.");
+        System.out.println("3. 각 메뉴의 제한사항을 지켜주세요.");
+        System.out.println("4. 게시판의 고유 숫자 post_no은 삭제되지 않았다면 1부터 시작합니다.");
+        System.out.println("-------------------------------------------------------");
+
+
         while (true) {
             System.out.println("\n<< 카페 메뉴 관리 프로그램 >>");
             System.out.println("1. 글 작성");
@@ -35,10 +43,22 @@ public class Service {
 
                 System.out.println("작성자의 이름을 입력하세요");
                 String poster = Input._string_();
+                if(poster.equals("0")){
+                    System.out.println("메인 메뉴로 돌아갑니다.");
+                    continue;
+                }
                 System.out.println("작성하실 글의 제목을 입력하세요");
                 String postTitle = Input._string_();
+                if(postTitle.equals("0")){
+                    System.out.println("메인 메뉴로 돌아갑니다.");
+                    continue;
+                }
                 System.out.println("내용을 입력하세요");
                 String postCont = Input._string_();
+                if(postCont.equals("0")){
+                    System.out.println("메인 메뉴로 돌아갑니다.");
+                    continue;
+                }
                 int result = boardDAO.insert(new Post(poster, postTitle, postCont));
 
                 if (result > 0) {
@@ -52,6 +72,10 @@ public class Service {
             } else if (menu == 3) { // 글 읽기
                 System.out.println("읽을 게시글의 POST_NO을 입력하세요.");
                 int findPostNo = Input._integer_();
+                if(findPostNo == 0){
+                    System.out.println("메인 메뉴로 돌아갑니다.");
+                    continue;
+                }
                 outPost(findPostNo);
 
             } else if (menu == 4) { // 글 지우기
@@ -64,7 +88,11 @@ public class Service {
                 //확인
                 outPost(delPostNo);
                 System.out.println("위 항목을 지우시겠습니까?(Y,N)");
-                String confirm = Input._string_("Y", "y", "N", "n");
+                String confirm = Input._string_("Y", "y", "N", "n", "0");
+                if(confirm.equals("0")){
+                    System.out.println("메인 메뉴로 돌아갑니다.");
+                    continue;
+                }
                 if (confirm.equals("y") || confirm.equals("Y")) {
                     // sql 입력
                     int result = boardDAO.delete(delPostNo);
@@ -83,6 +111,10 @@ public class Service {
                 // 수정 ID 입력
                 System.out.print("수정할 메뉴 ID 입력.");
                 int rePostNo = Input._integer_();
+                if(rePostNo == 0){
+                    System.out.println("메인 메뉴로 돌아갑니다.");
+                    continue;
+                }
                 // 수정할 컬럼 내용 출력
                 outPost(rePostNo);
 
@@ -94,8 +126,12 @@ public class Service {
                 String rePostCol = Input._string_(
                         "POSTER", "POST_TITLE", "POST_CONT","내용",
                         "poster", "post_title", "post_cont","제목",
-                        "Poster", "Post_title", "Post_cont","작성자");
-
+                        "Poster", "Post_title", "Post_cont","작성자",
+                        "0");
+                if(rePostCol.equals("0")){
+                    System.out.println("메인 메뉴로 돌아갑니다.");
+                    continue;
+                }
                 // 수정 내용 입력
 
                 String rePostCon = "";
@@ -105,14 +141,26 @@ public class Service {
                 if (rePostCol.equals("POST_CONT") || rePostCol.equals("post_cont") || rePostCol.equals("Post_cont")||rePostCol.equals("내용")) {
                     System.out.println("수정 내용 입력(최대 500글자)");
                     rePostCon = Input._string_(500);
+                    if(rePostCon.equals("0")){
+                        System.out.println("메인 메뉴로 돌아갑니다.");
+                        continue;
+                    }
                     rePost.setPostCont(rePostCon);
                 } else if (rePostCol.equals("POST_TITLE") || rePostCol.equals("post_title") || rePostCol.equals("Post_title")||rePostCol.equals("제목")) {
                     System.out.println("수정 제목 입력(최대 30글자)");
                     rePostCon = Input._string_(30);
+                    if(rePostCon.equals("0")){
+                        System.out.println("메인 메뉴로 돌아갑니다.");
+                        continue;
+                    }
                     rePost.setPostTitle(rePostCon);
                 } else {
                     System.out.println("수정 작성자 입력(최대 10글자)");
                     rePostCon = Input._string_(10);
+                    if(rePostCon.equals("0")){
+                        System.out.println("메인 메뉴로 돌아갑니다.");
+                        continue;
+                    }
                     rePost.setPoster(rePostCon);
                 }
 
@@ -134,6 +182,10 @@ public class Service {
 
                 System.out.println("Search 대상을 입력하세요.(작성자와 게시글 제목에서 검색합니다.)");
                 String searchText = Input._string_(30);
+                if(searchText.equals("0")){
+                    System.out.println("메인 메뉴로 돌아갑니다.");
+                    continue;
+                }
                 ArrayList<Integer> postNoArr = reviewBoardDAO.search(searchText);
 
                 if(postNoArr.size() != 0) {

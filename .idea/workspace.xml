@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e12c391d-8da7-49a7-bac1-ef473d7bacff" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/jdbc/reviewBoard/dto/Post.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jdbc/reviewBoard/main/Starter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/jdbc/reviewBoard/dao/ReviewBoardDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/jdbc/reviewBoard/dao/ReviewBoardDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/jdbc/reviewBoard/main/Service.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/jdbc/reviewBoard/main/Service.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -57,15 +54,15 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "last_opened_file_path": "D:/Jihoon/traning/.idea/libraries/ojdbc6_g.jar",
-    "project.structure.last.edited": "Libraries",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "terminal"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;last_opened_file_path&quot;: &quot;D:/Jihoon/traning/.idea/libraries/ojdbc6_g.jar&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;terminal&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="myCustom" />
