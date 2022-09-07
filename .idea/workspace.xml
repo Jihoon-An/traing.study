@@ -2,10 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e12c391d-8da7-49a7-bac1-ef473d7bacff" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/jdbc/reviewBoard/dto/Post.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/jdbc/reviewBoard/main/Starter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Review_board.iml" beforeDir="false" afterPath="$PROJECT_DIR$/traning.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/traning/jdbc/reviewBoard/dao/ReviewBoardDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/jdbc/reviewBoard/dao/ReviewBoardDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/traning/jdbc/reviewBoard/main/Service.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/jdbc/reviewBoard/main/Service.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/jdbc/reviewBoard/dao/ReviewBoardDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/jdbc/reviewBoard/dao/ReviewBoardDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/jdbc/reviewBoard/main/Service.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/jdbc/reviewBoard/main/Service.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,20 +57,21 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">
-    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/.idea/libraries/ojdbc6_g.jar" />
-    <property name="project.structure.last.edited" value="Libraries" />
-    <property name="project.structure.proportion" value="0.0" />
-    <property name="project.structure.side.proportion" value="0.2" />
-  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "last_opened_file_path": "D:/Jihoon/traning/.idea/libraries/ojdbc6_g.jar",
+    "project.structure.last.edited": "Libraries",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "terminal"
+  }
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="myCustom" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.Starter">
     <configuration name="Service" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="traning.jdbc.reviewBoard.Service" />
       <module name="traning" />
@@ -83,21 +85,22 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="JetRunConfigurationType">
+    <configuration name="Starter" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="jdbc.reviewBoard.main.Starter" />
       <module name="traning" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
-      <module name="traning" />
-      <option name="filePath" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="jdbc.reviewBoard.main.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Starter" />
         <item itemvalue="Application.Service" />
       </list>
     </recent_temporary>
@@ -123,5 +126,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>

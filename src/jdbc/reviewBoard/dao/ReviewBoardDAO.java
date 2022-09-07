@@ -1,5 +1,7 @@
 package jdbc.reviewBoard.dao;
 
+import jdbc.reviewBoard.dto.Post;
+
 import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -41,22 +43,20 @@ public class ReviewBoardDAO {
         this.dbPW = dbPW;
     }
 
-    public int insert(String... contents) {
-        try {
-            Class.forName("oracle.jdbc.driver.OracleDriver");
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-            System.exit(0);
-        }
+    private Connection getConnection() throws Exception{
+        Connection con = DriverManager.getConnection(dbURL, dbID, dbPW);
+        return con;
+    }
+
+    public int insert(Post post) {
         String sql = "insert into review_board values(review_seq.nextval, ?, ?, ?, sysdate)";
         try (
-                Connection con = DriverManager.getConnection(dbURL, dbID, dbPW);
+                Connection con = getConnection();
         ) {
             PreparedStatement statement = con.prepareStatement(sql);
-            int i = 1;
-            for (String content : contents) {
-                statement.setString(i++, content);
-            }
+            statement.setString(1, post.getPoster());
+            statement.setString(2, post.getPostTitle());
+            statement.setString(3, post.getPostCont());
             int result = statement.executeUpdate();
 
             con.commit();
@@ -67,15 +67,9 @@ public class ReviewBoardDAO {
             return 0;
         }
     }
-    public ArrayList<String> select() {
-        try {
-            Class.forName("oracle.jdbc.driver.OracleDriver");
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-            System.exit(0);
-        }
+    public ArrayList<Post> select() {
         String sql = "select POST_NO, POSTER, POST_TITLE, POST_TIME from review_board order by 1";
-        ArrayList<String> outStr = new ArrayList<>();
+        ArrayList<Post> out = new ArrayList<>();
         try (
                 Connection con = DriverManager.getConnection(dbURL, dbID, dbPW);
         ) {
@@ -83,63 +77,64 @@ public class ReviewBoardDAO {
             ResultSet result = statement.executeQuery();
 
             while (result.next()) {
-                int postNo = result.getInt("POST_NO");
-                String poster = result.getString("POSTER");
-                String postTitle = result.getString("POST_TITLE");
-                Timestamp postTimeDate  = result.getTimestamp("POST_TIME");
-
+                Post post = new Post();
+                post.setPostNo(result.getInt("POST_NO"));
+                post.setPoster(result.getString("POSTER"));
+                post.setPostTitle(result.getString("POST_TITLE"));
+                post.setPostTimestamp(result.getTimestamp("POST_TIME"));
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy년 MM월 dd일 hh시 mm분");
-                String postTime = simpleDateFormat.format(postTimeDate.getTime());
-
-                outStr.add(postNo + " : " + poster + " : " + postTitle + " : " + postTime);
+                long difTime = (System.currentTimeMillis() - post.getPostTimestamp().getTime())/(3600000);
+                //하루가 안 지났을 때
+                if(difTime < 24) {
+                    post.setPostTime(difTime + "시간 전");
+                }
+                else {
+                    // 하루가 지났을 때
+                    post.setPostTime(simpleDateFormat.format(post.getPostTimestamp().getTime()));
+                }
+                out.add(post);
             }
-            return outStr;
+            return out;
         } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
     }
 
-    public ArrayList<String> select(int findPostNo) {
-        try {
-            Class.forName("oracle.jdbc.driver.OracleDriver");
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-            System.exit(0);
-        }
-        ArrayList<String> outStr = new ArrayList<>();
+    public Post select(int findPostNo) {
         String sql = "select * from review_board where post_no = ?";
         try (
                 Connection con = DriverManager.getConnection(dbURL, dbID, dbPW);
         ) {
+
             PreparedStatement statement = con.prepareStatement(sql);
             statement.setInt(1, findPostNo);
             ResultSet result = statement.executeQuery();
             result.next();
-            int postNo = result.getInt("POST_NO");
-            String poster = result.getString("POSTER");
-            String postTitle = result.getString("POST_TITLE");
-            Timestamp postTimeDate  = result.getTimestamp("POST_TIME");
+            Post post = new Post();
+            post.setPostNo(result.getInt("POST_NO"));
+            post.setPoster(result.getString("POSTER"));
+            post.setPostTitle(result.getString("POST_TITLE"));
+            post.setPostCont(result.getString("POST_CONT"));
+            post.setPostTimestamp(result.getTimestamp("POST_TIME"));
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy년 MM월 dd일 hh시 mm분");
-            String postTime = simpleDateFormat.format(postTimeDate);
+            long difTime = (System.currentTimeMillis() - post.getPostTimestamp().getTime())/(3600000);
+            //하루가 안 지났을 때
+            if(difTime < 24) {
+                post.setPostTime(difTime + "시간 전");
+            }
+            else {
+                // 하루가 지났을 때
+                post.setPostTime(simpleDateFormat.format(post.getPostTimestamp().getTime()));
+            }
 
-            outStr.add(postNo + " : " + poster + " : " + postTitle + " : " + postTime);
-            outStr.add(result.getString("POST_CONT"));
-
-            return outStr;
+            return post;
         } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
     }
-
     public int delete(int postNo) {
-        try {
-            Class.forName("oracle.jdbc.driver.OracleDriver");
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-            System.exit(0);
-        }
         String sql = "delete from review_board where post_no = ?";
         try (
                 Connection con = DriverManager.getConnection(dbURL, dbID, dbPW);
@@ -158,21 +153,16 @@ public class ReviewBoardDAO {
     }
 
 
-    public int update(int rePostNo, String rePortCol, String rePostCon) {
-        try {
-            Class.forName("oracle.jdbc.driver.OracleDriver");
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-            System.exit(0);
-        }
-        String sql = "Update review_board set ? = ? where pid = ?";
+    public int update(Post rePost) {
+        String sql = "Update review_board set POSTER = ?, POST_TITLE = ?, POST_CONT = ? where POST_NO = ?";
         try (
                 Connection con = DriverManager.getConnection(dbURL, dbID, dbPW);
         ) {
             PreparedStatement statement = con.prepareStatement(sql);
-            statement.setString(1, rePortCol);
-            statement.setString(2, rePostCon);
-            statement.setInt(3, rePostNo);
+            statement.setString(1, rePost.getPoster());
+            statement.setString(2, rePost.getPostTitle());
+            statement.setString(3, rePost.getPostCont());
+            statement.setInt(4, rePost.getPostNo());
             int result = statement.executeUpdate();
 
             con.commit();
@@ -185,20 +175,14 @@ public class ReviewBoardDAO {
     }
 
     public ArrayList<Integer> search(String searchText){
-        try {
-            Class.forName("oracle.jdbc.driver.OracleDriver");
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-            System.exit(0);
-        }
-        String sql = "select POST_NO from review_board where (POST_TITLE = ?) or (POSTER = ?) order by 1";
+        String sql = "select POST_NO from review_board where (POST_TITLE like ?) or (POSTER like ?) order by POSTER";
         ArrayList<Integer> outStr = new ArrayList<>();
         try (
                 Connection con = DriverManager.getConnection(dbURL, dbID, dbPW);
         ) {
             PreparedStatement statement = con.prepareStatement(sql);
-            statement.setString(1, searchText);
-            statement.setString(2, searchText);
+            statement.setString(1, "%"+searchText+"%");
+            statement.setString(2, "%"+searchText+"%");
             ResultSet result = statement.executeQuery();
 
             while (result.next()) {
