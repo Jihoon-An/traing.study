@@ -1,6 +1,6 @@
 package jdbc.reviewBoard.dao;
 
-import jdbc.reviewBoard.dto.Post;
+import jdbc.reviewBoard.dto.PostDTO;
 
 import java.sql.*;
 import java.text.SimpleDateFormat;
@@ -42,21 +42,15 @@ public class ReviewBoardDAO {
         this.dbID = dbID;
         this.dbPW = dbPW;
     }
-
-    private Connection getConnection() throws Exception{
-        Connection con = DriverManager.getConnection(dbURL, dbID, dbPW);
-        return con;
-    }
-
-    public int insert(Post post) {
+    public int insert(PostDTO post) {
         String sql = "insert into review_board values(review_seq.nextval, ?, ?, ?, sysdate)";
         try (
-                Connection con = getConnection();
+                Connection con = DriverManager.getConnection(dbURL, dbID, dbPW);
         ) {
             PreparedStatement statement = con.prepareStatement(sql);
             statement.setString(1, post.getPoster());
-            statement.setString(2, post.getPostTitle());
-            statement.setString(3, post.getPostCont());
+            statement.setString(2, post.getPost_title());
+            statement.setString(3, post.getPost_cont());
             int result = statement.executeUpdate();
 
             con.commit();
@@ -67,9 +61,9 @@ public class ReviewBoardDAO {
             return 0;
         }
     }
-    public ArrayList<Post> select() {
+    public ArrayList<PostDTO> select() {
         String sql = "select POST_NO, POSTER, POST_TITLE, POST_TIME from review_board order by 1";
-        ArrayList<Post> out = new ArrayList<>();
+        ArrayList<PostDTO> out = new ArrayList<>();
         try (
                 Connection con = DriverManager.getConnection(dbURL, dbID, dbPW);
         ) {
@@ -77,21 +71,12 @@ public class ReviewBoardDAO {
             ResultSet result = statement.executeQuery();
 
             while (result.next()) {
-                Post post = new Post();
-                post.setPostNo(result.getInt("POST_NO"));
+                PostDTO post = new PostDTO();
+                post.setPost_no(result.getInt("POST_NO"));
                 post.setPoster(result.getString("POSTER"));
-                post.setPostTitle(result.getString("POST_TITLE"));
-                post.setPostTimestamp(result.getTimestamp("POST_TIME"));
-                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy년 MM월 dd일 hh시 mm분");
-                long difTime = (System.currentTimeMillis() - post.getPostTimestamp().getTime())/(3600000);
-                //하루가 안 지났을 때
-                if(difTime < 24) {
-                    post.setPostTime(difTime + "시간 전");
-                }
-                else {
-                    // 하루가 지났을 때
-                    post.setPostTime(simpleDateFormat.format(post.getPostTimestamp().getTime()));
-                }
+                post.setPost_title(result.getString("POST_TITLE"));
+                post.setPost_time(result.getTimestamp("POST_TIME"));
+                post.setPost_time_str();
                 out.add(post);
             }
             return out;
@@ -101,7 +86,7 @@ public class ReviewBoardDAO {
         }
     }
 
-    public Post select(int findPostNo) {
+    public PostDTO select(int findPostNo) {
         String sql = "select * from review_board where post_no = ?";
         try (
                 Connection con = DriverManager.getConnection(dbURL, dbID, dbPW);
@@ -111,22 +96,13 @@ public class ReviewBoardDAO {
             statement.setInt(1, findPostNo);
             ResultSet result = statement.executeQuery();
             result.next();
-            Post post = new Post();
-            post.setPostNo(result.getInt("POST_NO"));
+            PostDTO post = new PostDTO();
+            post.setPost_no(result.getInt("POST_NO"));
             post.setPoster(result.getString("POSTER"));
-            post.setPostTitle(result.getString("POST_TITLE"));
-            post.setPostCont(result.getString("POST_CONT"));
-            post.setPostTimestamp(result.getTimestamp("POST_TIME"));
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy년 MM월 dd일 hh시 mm분");
-            long difTime = (System.currentTimeMillis() - post.getPostTimestamp().getTime())/(3600000);
-            //하루가 안 지났을 때
-            if(difTime < 24) {
-                post.setPostTime(difTime + "시간 전");
-            }
-            else {
-                // 하루가 지났을 때
-                post.setPostTime(simpleDateFormat.format(post.getPostTimestamp().getTime()));
-            }
+            post.setPost_title(result.getString("POST_TITLE"));
+            post.setPost_cont(result.getString("POST_CONT"));
+            post.setPost_time(result.getTimestamp("POST_TIME"));
+            post.setPost_time_str();
 
             return post;
         } catch (Exception e) {
@@ -153,16 +129,16 @@ public class ReviewBoardDAO {
     }
 
 
-    public int update(Post rePost) {
+    public int update(PostDTO rePost) {
         String sql = "Update review_board set POSTER = ?, POST_TITLE = ?, POST_CONT = ? where POST_NO = ?";
         try (
                 Connection con = DriverManager.getConnection(dbURL, dbID, dbPW);
         ) {
             PreparedStatement statement = con.prepareStatement(sql);
             statement.setString(1, rePost.getPoster());
-            statement.setString(2, rePost.getPostTitle());
-            statement.setString(3, rePost.getPostCont());
-            statement.setInt(4, rePost.getPostNo());
+            statement.setString(2, rePost.getPost_title());
+            statement.setString(3, rePost.getPost_cont());
+            statement.setInt(4, rePost.getPost_no());
             int result = statement.executeUpdate();
 
             con.commit();

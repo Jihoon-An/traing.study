@@ -1,10 +1,9 @@
 package jdbc.reviewBoard.main;
 
 import jdbc.reviewBoard.dao.ReviewBoardDAO;
-import jdbc.reviewBoard.dto.Post;
+import jdbc.reviewBoard.dto.PostDTO;
 import myCustom.Input;
 
-import java.sql.Timestamp;
 import java.util.ArrayList;
 
 public class Service {
@@ -59,7 +58,7 @@ public class Service {
                     System.out.println("메인 메뉴로 돌아갑니다.");
                     continue;
                 }
-                int result = boardDAO.insert(new Post(poster, postTitle, postCont));
+                int result = boardDAO.insert(new PostDTO(poster, postTitle, postCont));
 
                 if (result > 0) {
                     System.out.println("작성 성공");
@@ -136,7 +135,7 @@ public class Service {
 
                 String rePostCon = "";
 
-                Post rePost = boardDAO.select(rePostNo);
+                PostDTO rePost = boardDAO.select(rePostNo);
 
                 if (rePostCol.equals("POST_CONT") || rePostCol.equals("post_cont") || rePostCol.equals("Post_cont")||rePostCol.equals("내용")) {
                     System.out.println("수정 내용 입력(최대 500글자)");
@@ -145,7 +144,7 @@ public class Service {
                         System.out.println("메인 메뉴로 돌아갑니다.");
                         continue;
                     }
-                    rePost.setPostCont(rePostCon);
+                    rePost.setPost_cont(rePostCon);
                 } else if (rePostCol.equals("POST_TITLE") || rePostCol.equals("post_title") || rePostCol.equals("Post_title")||rePostCol.equals("제목")) {
                     System.out.println("수정 제목 입력(최대 30글자)");
                     rePostCon = Input._string_(30);
@@ -153,7 +152,7 @@ public class Service {
                         System.out.println("메인 메뉴로 돌아갑니다.");
                         continue;
                     }
-                    rePost.setPostTitle(rePostCon);
+                    rePost.setPost_title(rePostCon);
                 } else {
                     System.out.println("수정 작성자 입력(최대 10글자)");
                     rePostCon = Input._string_(10);
@@ -191,8 +190,8 @@ public class Service {
                 if(postNoArr.size() != 0) {
                     System.out.println("글 번호 \t: 작성자 \t: 글 제목 \t: 작성 시간");
                     for (int findPostNo : postNoArr) {
-                        Post result = reviewBoardDAO.select(findPostNo);
-                        System.out.println(result.getPostNo()+ " \t: " + result.getPoster()+ " \t: " +result.getPostTitle()+ "  \t: " +result.getPostTime());
+                        PostDTO result = reviewBoardDAO.select(findPostNo);
+                        System.out.println(result.getPost_no()+ " \t: " + result.getPoster()+ " \t: " +result.getPost_title()+ "  \t: " +result.getPost_time_str());
                     }
                 }
                 else{
@@ -208,27 +207,27 @@ public class Service {
 
     static void outPostList() {
         ReviewBoardDAO boardDAO = new ReviewBoardDAO(dbID, dbPW);
-        ArrayList<Post> resultArr = boardDAO.select();
+        ArrayList<PostDTO> resultArr = boardDAO.select();
         if (resultArr.size() == 0) {
             System.out.println("글 목록이 존재하지 않습니다.");
         } else {
             System.out.println("글 번호 \t: 작성자 \t: 글 제목 \t: 작성 시간");
-            for (Post result : resultArr) {
-                System.out.println(result.getPostNo()+ " \t: " + result.getPoster()+ " \t: " +result.getPostTitle()+ "  \t: " +result.getPostTime());
+            for (PostDTO result : resultArr) {
+                System.out.println(result.getPost_no()+ " \t: " + result.getPoster()+ " \t: " +result.getPost_title()+ "  \t: " +result.getPost_time_str());
             }
         }
     }
 
     static void outPost(int findPostNo) {
         ReviewBoardDAO boardDAO = new ReviewBoardDAO(dbID, dbPW);
-        Post result = boardDAO.select(findPostNo);
+        PostDTO result = boardDAO.select(findPostNo);
         if (result == null) {
             System.out.println("글 번호를 잘못 입력하셨습니다.");
         } else {
             System.out.println("글 번호 \t: 작성자 \t: 글 제목 \t: 작성 시간");
-            System.out.println(result.getPostNo()+ " \t: " + result.getPoster()+ " \t: " +result.getPostTitle()+ "  \t: " +result.getPostTime());
+            System.out.println(result.getPost_no()+ " \t: " + result.getPoster()+ " \t: " +result.getPost_title()+ "  \t: " +result.getPost_time_str());
             System.out.println("vv 글 내용 vv");
-            System.out.println(result.getPostCont());
+            System.out.println(result.getPost_cont());
         }
     }
 }
