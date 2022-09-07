@@ -42,11 +42,12 @@ public class ReviewBoardDAO {
         this.dbID = dbID;
         this.dbPW = dbPW;
     }
+
     public int insert(PostDTO post) {
-        String sql = "insert into review_board values(review_seq.nextval, ?, ?, ?, sysdate)";
         try (
                 Connection con = DriverManager.getConnection(dbURL, dbID, dbPW);
         ) {
+            String sql = "insert into review_board values(review_seq.nextval, ?, ?, ?, sysdate)";
             PreparedStatement statement = con.prepareStatement(sql);
             statement.setString(1, post.getPoster());
             statement.setString(2, post.getPost_title());
@@ -61,12 +62,13 @@ public class ReviewBoardDAO {
             return 0;
         }
     }
+
     public ArrayList<PostDTO> select() {
-        String sql = "select POST_NO, POSTER, POST_TITLE, POST_TIME from review_board order by 1";
-        ArrayList<PostDTO> out = new ArrayList<>();
         try (
                 Connection con = DriverManager.getConnection(dbURL, dbID, dbPW);
         ) {
+            String sql = "select POST_NO, POSTER, POST_TITLE, POST_TIME from review_board order by 1";
+            ArrayList<PostDTO> out = new ArrayList<>();
             PreparedStatement statement = con.prepareStatement(sql);
             ResultSet result = statement.executeQuery();
 
@@ -87,11 +89,10 @@ public class ReviewBoardDAO {
     }
 
     public PostDTO select(int findPostNo) {
-        String sql = "select * from review_board where post_no = ?";
         try (
                 Connection con = DriverManager.getConnection(dbURL, dbID, dbPW);
         ) {
-
+            String sql = "select * from review_board where post_no = ?";
             PreparedStatement statement = con.prepareStatement(sql);
             statement.setInt(1, findPostNo);
             ResultSet result = statement.executeQuery();
@@ -110,11 +111,12 @@ public class ReviewBoardDAO {
             return null;
         }
     }
+
     public int delete(int postNo) {
-        String sql = "delete from review_board where post_no = ?";
         try (
                 Connection con = DriverManager.getConnection(dbURL, dbID, dbPW);
         ) {
+            String sql = "delete from review_board where post_no = ?";
             PreparedStatement statement = con.prepareStatement(sql);
             statement.setInt(1, postNo);
             int result = statement.executeUpdate();
@@ -130,10 +132,10 @@ public class ReviewBoardDAO {
 
 
     public int update(PostDTO rePost) {
-        String sql = "Update review_board set POSTER = ?, POST_TITLE = ?, POST_CONT = ? where POST_NO = ?";
         try (
                 Connection con = DriverManager.getConnection(dbURL, dbID, dbPW);
         ) {
+            String sql = "Update review_board set POSTER = ?, POST_TITLE = ?, POST_CONT = ? where POST_NO = ?";
             PreparedStatement statement = con.prepareStatement(sql);
             statement.setString(1, rePost.getPoster());
             statement.setString(2, rePost.getPost_title());
@@ -150,15 +152,15 @@ public class ReviewBoardDAO {
         }
     }
 
-    public ArrayList<Integer> search(String searchText){
-        String sql = "select POST_NO from review_board where (POST_TITLE like ?) or (POSTER like ?) order by POSTER";
-        ArrayList<Integer> outStr = new ArrayList<>();
+    public ArrayList<Integer> search(String searchText) {
         try (
                 Connection con = DriverManager.getConnection(dbURL, dbID, dbPW);
         ) {
+            String sql = "select POST_NO from review_board where (POST_TITLE like ?) or (POSTER like ?) order by POSTER";
+            ArrayList<Integer> outStr = new ArrayList<>();
             PreparedStatement statement = con.prepareStatement(sql);
-            statement.setString(1, "%"+searchText+"%");
-            statement.setString(2, "%"+searchText+"%");
+            statement.setString(1, "%" + searchText + "%");
+            statement.setString(2, "%" + searchText + "%");
             ResultSet result = statement.executeQuery();
 
             while (result.next()) {
