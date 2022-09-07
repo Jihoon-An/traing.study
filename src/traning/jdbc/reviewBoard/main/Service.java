@@ -1,6 +1,6 @@
-package main;
+package traning.jdbc.reviewBoard.main;
 
-import dao.ReviewBoardDAO;
+import traning.jdbc.reviewBoard.dao.ReviewBoardDAO;
 import myCustom.Input;
 
 import java.util.ArrayList;

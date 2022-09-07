@@ -1,4 +1,4 @@
-package dao;
+package traning.jdbc.reviewBoard.dao;
 
 import java.sql.*;
 import java.text.SimpleDateFormat;

@@ -70,11 +70,11 @@
   </component>
   <component name="RunManager">
     <configuration name="Service" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="main.Service" />
+      <option name="MAIN_CLASS_NAME" value="traning.jdbc.reviewBoard.Service" />
       <module name="Review_board" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="main.*" />
+          <option name="PATTERN" value="traning.jdbc.reviewBoard.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
