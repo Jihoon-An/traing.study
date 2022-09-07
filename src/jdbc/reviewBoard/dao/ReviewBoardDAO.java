@@ -44,11 +44,11 @@ public class ReviewBoardDAO {
     }
 
     public int insert(PostDTO post) {
+        String sql = "insert into review_board values(review_seq.nextval, ?, ?, ?, sysdate)";
         try (
                 Connection con = DriverManager.getConnection(dbURL, dbID, dbPW);
+                PreparedStatement statement = con.prepareStatement(sql);
         ) {
-            String sql = "insert into review_board values(review_seq.nextval, ?, ?, ?, sysdate)";
-            PreparedStatement statement = con.prepareStatement(sql);
             statement.setString(1, post.getPoster());
             statement.setString(2, post.getPost_title());
             statement.setString(3, post.getPost_cont());
@@ -64,24 +64,26 @@ public class ReviewBoardDAO {
     }
 
     public ArrayList<PostDTO> select() {
+        String sql = "select POST_NO, POSTER, POST_TITLE, POST_TIME from review_board order by 1";
+        ArrayList<PostDTO> out = new ArrayList<>();
         try (
                 Connection con = DriverManager.getConnection(dbURL, dbID, dbPW);
+                PreparedStatement statement = con.prepareStatement(sql);
         ) {
-            String sql = "select POST_NO, POSTER, POST_TITLE, POST_TIME from review_board order by 1";
-            ArrayList<PostDTO> out = new ArrayList<>();
-            PreparedStatement statement = con.prepareStatement(sql);
-            ResultSet result = statement.executeQuery();
-
-            while (result.next()) {
-                PostDTO post = new PostDTO();
-                post.setPost_no(result.getInt("POST_NO"));
-                post.setPoster(result.getString("POSTER"));
-                post.setPost_title(result.getString("POST_TITLE"));
-                post.setPost_time(result.getTimestamp("POST_TIME"));
-                post.setPost_time_str();
-                out.add(post);
+            try (
+                    ResultSet result = statement.executeQuery();
+            ) {
+                while (result.next()) {
+                    PostDTO post = new PostDTO();
+                    post.setPost_no(result.getInt("POST_NO"));
+                    post.setPoster(result.getString("POSTER"));
+                    post.setPost_title(result.getString("POST_TITLE"));
+                    post.setPost_time(result.getTimestamp("POST_TIME"));
+                    post.setPost_time_str();
+                    out.add(post);
+                }
+                return out;
             }
-            return out;
         } catch (Exception e) {
             e.printStackTrace();
             return null;
@@ -89,23 +91,26 @@ public class ReviewBoardDAO {
     }
 
     public PostDTO select(int findPostNo) {
+        String sql = "select * from review_board where post_no = ?";
         try (
                 Connection con = DriverManager.getConnection(dbURL, dbID, dbPW);
+                PreparedStatement statement = con.prepareStatement(sql);
         ) {
-            String sql = "select * from review_board where post_no = ?";
-            PreparedStatement statement = con.prepareStatement(sql);
             statement.setInt(1, findPostNo);
-            ResultSet result = statement.executeQuery();
-            result.next();
-            PostDTO post = new PostDTO();
-            post.setPost_no(result.getInt("POST_NO"));
-            post.setPoster(result.getString("POSTER"));
-            post.setPost_title(result.getString("POST_TITLE"));
-            post.setPost_cont(result.getString("POST_CONT"));
-            post.setPost_time(result.getTimestamp("POST_TIME"));
-            post.setPost_time_str();
+            try (
+                    ResultSet result = statement.executeQuery();
+            ) {
+                result.next();
+                PostDTO post = new PostDTO();
+                post.setPost_no(result.getInt("POST_NO"));
+                post.setPoster(result.getString("POSTER"));
+                post.setPost_title(result.getString("POST_TITLE"));
+                post.setPost_cont(result.getString("POST_CONT"));
+                post.setPost_time(result.getTimestamp("POST_TIME"));
+                post.setPost_time_str();
 
-            return post;
+                return post;
+            }
         } catch (Exception e) {
             e.printStackTrace();
             return null;
@@ -113,11 +118,11 @@ public class ReviewBoardDAO {
     }
 
     public int delete(int postNo) {
+        String sql = "delete from review_board where post_no = ?";
         try (
                 Connection con = DriverManager.getConnection(dbURL, dbID, dbPW);
+                PreparedStatement statement = con.prepareStatement(sql);
         ) {
-            String sql = "delete from review_board where post_no = ?";
-            PreparedStatement statement = con.prepareStatement(sql);
             statement.setInt(1, postNo);
             int result = statement.executeUpdate();
 
@@ -132,11 +137,11 @@ public class ReviewBoardDAO {
 
 
     public int update(PostDTO rePost) {
+        String sql = "Update review_board set POSTER = ?, POST_TITLE = ?, POST_CONT = ? where POST_NO = ?";
         try (
                 Connection con = DriverManager.getConnection(dbURL, dbID, dbPW);
+                PreparedStatement statement = con.prepareStatement(sql);
         ) {
-            String sql = "Update review_board set POSTER = ?, POST_TITLE = ?, POST_CONT = ? where POST_NO = ?";
-            PreparedStatement statement = con.prepareStatement(sql);
             statement.setString(1, rePost.getPoster());
             statement.setString(2, rePost.getPost_title());
             statement.setString(3, rePost.getPost_cont());
@@ -153,21 +158,24 @@ public class ReviewBoardDAO {
     }
 
     public ArrayList<Integer> search(String searchText) {
+        String sql = "select POST_NO from review_board where (POST_TITLE like ?) or (POSTER like ?) order by POSTER";
+        ArrayList<Integer> outStr = new ArrayList<>();
         try (
                 Connection con = DriverManager.getConnection(dbURL, dbID, dbPW);
+                PreparedStatement statement = con.prepareStatement(sql);
         ) {
-            String sql = "select POST_NO from review_board where (POST_TITLE like ?) or (POSTER like ?) order by POSTER";
-            ArrayList<Integer> outStr = new ArrayList<>();
-            PreparedStatement statement = con.prepareStatement(sql);
             statement.setString(1, "%" + searchText + "%");
             statement.setString(2, "%" + searchText + "%");
-            ResultSet result = statement.executeQuery();
+            try (
+                    ResultSet result = statement.executeQuery();
+            ) {
 
-            while (result.next()) {
-                int postNo = result.getInt("POST_NO");
-                outStr.add(postNo);
+                while (result.next()) {
+                    int postNo = result.getInt("POST_NO");
+                    outStr.add(postNo);
+                }
+                return outStr;
             }
-            return outStr;
         } catch (Exception e) {
             e.printStackTrace();
             return null;
