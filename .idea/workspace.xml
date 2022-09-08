@@ -2,21 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e12c391d-8da7-49a7-bac1-ef473d7bacff" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/signUp/main/client/Controller.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/signUp/main/server/Controller.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/signUp/main/client/ClientController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/signUp/main/client/ClientStarter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/signUp/main/server/ServerController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/signUp/main/server/ServerStarter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/signUp/test/client/ViewTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/client/main/Controller.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/client/main/View.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/signUp/main/client/View.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/done/jdbc/reviewBoard/dao/ReviewBoardDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/jdbc/reviewBoard/main/dao/ReviewBoardDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/done/jdbc/reviewBoard/dto/PostDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/jdbc/reviewBoard/main/dto/PostDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/done/jdbc/reviewBoard/main/Service.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/jdbc/reviewBoard/main/Service.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/done/jdbc/reviewBoard/main/Starter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/jdbc/reviewBoard/main/Starter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/done/myCustom/Input.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/myCustom/Input.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/server/dao/SignUpDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/signUp/main/server/dao/SignUpDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/server/dto/SignUpDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/signUp/main/server/dto/SignUpDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/server/main/Controller.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/server/test/SignInTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/signUp/test/server/SignInTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/server/test/SignUpTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/signUp/test/server/SignUpTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/signUp/main/client/Controller.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/signUp/main/server/Controller.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/signUp/main/server/dao/SignUpDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/signUp/main/server/dao/SignUpDAO.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,27 +62,24 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "last_opened_file_path": "D:/Jihoon/KH-class-project",
-    "project.structure.last.edited": "Libraries",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "terminal"
-  }
-}]]></component>
+  <component name="PropertiesComponent">
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="project.structure.last.edited" value="Libraries" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
+  </component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="myCustom" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.SignInTest">
-    <configuration name="Service" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="traning.jdbc.reviewBoard.Service" />
+  <component name="RunManager" selected="Application.SignInTest (1)">
+    <configuration name="SignInTest (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="signUp.test.server.SignInTest" />
       <module name="traning" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="traning.jdbc.reviewBoard.*" />
+          <option name="PATTERN" value="signUp.test.server.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -97,6 +89,19 @@
     </configuration>
     <configuration name="SignInTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="server.test.SignInTest" />
+      <module name="traning" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="signUp.test.server.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SignUpTest (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="signUp.test.server.SignUpTest" />
       <module name="traning" />
       <extension name="coverage">
         <pattern>
@@ -136,10 +141,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.SignInTest (1)" />
+        <item itemvalue="Application.SignUpTest (1)" />
         <item itemvalue="Application.SignInTest" />
         <item itemvalue="Application.SignUpTest" />
         <item itemvalue="Application.Starter" />
-        <item itemvalue="Application.Service" />
       </list>
     </recent_temporary>
   </component>
