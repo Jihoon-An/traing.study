@@ -22,10 +22,10 @@ public class SignUpDAO {
     private BasicDataSource bds= new BasicDataSource();
 
     private SignUpDAO() {
-        this.bds.setUrl("jdbc:oracle:thin:@192.168.50.54:1521:xe");
+        this.bds.setUrl("done.jdbc:oracle:thin:@192.168.50.54:1521:xe");
         this.bds.setUsername("signup");
         this.bds.setPassword("signup");
-        this.bds.setDriverClassName("oracle.jdbc.driver.OracleDriver");
+        this.bds.setDriverClassName("oracle.done.jdbc.driver.OracleDriver");
         this.bds.setInitialSize(30);
     }
 

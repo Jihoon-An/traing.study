@@ -1,6 +1,6 @@
-package jdbc.reviewBoard.dao;
+package done.jdbc.reviewBoard.dao;
 
-import jdbc.reviewBoard.dto.PostDTO;
+import done.jdbc.reviewBoard.dto.PostDTO;
 import org.apache.commons.dbcp2.BasicDataSource;
 
 import java.sql.*;
@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class ReviewBoardDAO {
     private String dbID = "review_board";
     private String dbPW = "review";
-    private String dbURL = "jdbc:oracle:thin:@localhost:1521:xe";
+    private String dbURL = "done.jdbc:oracle:thin:@localhost:1521:xe";
 
     private String tableName = "review_board";
 
@@ -68,7 +68,7 @@ public class ReviewBoardDAO {
         this.bds.setUrl(dbURL);
         this.bds.setUsername(dbID);
         this.bds.setPassword(dbPW);
-        this.bds.setDriverClassName("oracle.jdbc.driver.OracleDriver");
+        this.bds.setDriverClassName("oracle.done.jdbc.driver.OracleDriver");
         this.bds.setInitialSize(30);
     }
 
@@ -78,7 +78,7 @@ public class ReviewBoardDAO {
         this.bds.setUrl(dbURL);
         this.bds.setUsername(dbID);
         this.bds.setPassword(dbPW);
-        this.bds.setDriverClassName("oracle.jdbc.driver.OracleDriver");
+        this.bds.setDriverClassName("oracle.done.jdbc.driver.OracleDriver");
         this.bds.setInitialSize(30);
     }
 

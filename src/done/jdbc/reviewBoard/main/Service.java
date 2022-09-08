@@ -1,8 +1,8 @@
-package jdbc.reviewBoard.main;
+package done.jdbc.reviewBoard.main;
 
-import jdbc.reviewBoard.dao.ReviewBoardDAO;
-import jdbc.reviewBoard.dto.PostDTO;
-import myCustom.Input;
+import done.jdbc.reviewBoard.dao.ReviewBoardDAO;
+import done.jdbc.reviewBoard.dto.PostDTO;
+import done.myCustom.Input;
 
 import java.util.ArrayList;
 

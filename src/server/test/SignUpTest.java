@@ -1,11 +1,11 @@
-package test;
+package server.test;
 
 import server.dao.SignUpDAO;
 import server.dto.SignUpDTO;
 
-public class SignInTest {
+public class SignUpTest {
     public static void main(String[] args) throws Exception {
         SignUpDAO sign = SignUpDAO.getInstance();
-        System.out.println(sign.signInDAO(new SignUpDTO("asdff", "asdff")));
+        System.out.println(sign.signUpDAO(new SignUpDTO("asdff", "asdff", "asdff")));
     }
 }

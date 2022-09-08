@@ -2,16 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e12c391d-8da7-49a7-bac1-ef473d7bacff" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/client/main/Controller.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/client/main/View.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/server/dao/SignUpDAO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/server/dto/SignUpDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/server/main/Controller.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/SignInTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/SignUpTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/jdbc/reviewBoard/dao/ReviewBoardDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/jdbc/reviewBoard/dao/ReviewBoardDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/jdbc/reviewBoard/main/Service.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/jdbc/reviewBoard/main/Service.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client/main/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/main/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client/main/View.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/main/View.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/jdbc/reviewBoard/dao/ReviewBoardDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/done/jdbc/reviewBoard/dao/ReviewBoardDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/jdbc/reviewBoard/dto/PostDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/done/jdbc/reviewBoard/dto/PostDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/jdbc/reviewBoard/main/Service.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/done/jdbc/reviewBoard/main/Service.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/jdbc/reviewBoard/main/Starter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/done/jdbc/reviewBoard/main/Starter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/myCustom/Input.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/done/myCustom/Input.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/server/dao/SignUpDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/dao/SignUpDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/SignInTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/test/SignInTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/SignUpTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/server/test/SignUpTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -91,11 +92,11 @@
       </method>
     </configuration>
     <configuration name="SignInTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="test.SignInTest" />
+      <option name="MAIN_CLASS_NAME" value="server.test.SignInTest" />
       <module name="traning" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="test.*" />
+          <option name="PATTERN" value="server.test.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -104,11 +105,11 @@
       </method>
     </configuration>
     <configuration name="SignUpTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="test.SignUpTest" />
+      <option name="MAIN_CLASS_NAME" value="server.test.SignUpTest" />
       <module name="traning" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="test.*" />
+          <option name="PATTERN" value="server.test.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -117,11 +118,11 @@
       </method>
     </configuration>
     <configuration name="Starter" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="jdbc.reviewBoard.main.Starter" />
+      <option name="MAIN_CLASS_NAME" value="done.jdbc.reviewBoard.main.Starter" />
       <module name="traning" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="jdbc.reviewBoard.main.*" />
+          <option name="PATTERN" value="done.jdbc.reviewBoard.main.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>

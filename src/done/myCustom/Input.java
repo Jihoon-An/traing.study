@@ -1,4 +1,4 @@
-package myCustom;
+package done.myCustom;
 
 import java.util.Scanner;
 
