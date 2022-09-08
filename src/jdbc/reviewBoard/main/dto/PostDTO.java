@@ -1,4 +1,4 @@
-package done.jdbc.reviewBoard.dto;
+package jdbc.reviewBoard.main.dto;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;

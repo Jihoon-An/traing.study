@@ -1,4 +1,4 @@
-package server.dto;
+package signUp.main.server.dto;
 
 public class SignUpDTO {
     private String user_id = "";

@@ -1,6 +1,4 @@
-package client.main;
-
-import java.util.Scanner;
+package signUp.main.client;
 
 public class View {
 

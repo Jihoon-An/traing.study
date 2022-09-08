@@ -1,11 +1,11 @@
-package server.dao;
+package signUp.main.server.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 import org.apache.commons.dbcp2.BasicDataSource;
-import server.dto.SignUpDTO;
+import signUp.main.server.dto.SignUpDTO;
 
 public class SignUpDAO {
 
@@ -22,10 +22,10 @@ public class SignUpDAO {
     private BasicDataSource bds= new BasicDataSource();
 
     private SignUpDAO() {
-        this.bds.setUrl("done.jdbc:oracle:thin:@192.168.50.54:1521:xe");
+        this.bds.setUrl("jdbc:oracle:thin:@192.168.50.54:1521:xe");
         this.bds.setUsername("signup");
         this.bds.setPassword("signup");
-        this.bds.setDriverClassName("oracle.done.jdbc.driver.OracleDriver");
+        this.bds.setDriverClassName("oracle.jdbc.driver.OracleDriver");
         this.bds.setInitialSize(30);
     }
 
