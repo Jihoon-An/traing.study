@@ -11,6 +11,26 @@ public class ReviewBoardDAO {
     private String dbPW = "review";
     private String dbURL = "jdbc:oracle:thin:@localhost:1521:xe";
 
+    private String tableName = "review_board";
+
+    private String sequenceName = "review_seq";
+
+    public String getTableName() {
+        return tableName;
+    }
+
+    public void setTableName(String tableName) {
+        this.tableName = tableName;
+    }
+
+    public String getSequenceName() {
+        return sequenceName;
+    }
+
+    public void setSequenceName(String sequenceName) {
+        this.sequenceName = sequenceName;
+    }
+
     public String getDbID() {
         return dbID;
     }
@@ -86,7 +106,7 @@ public class ReviewBoardDAO {
         }
     }
 
-    public ArrayList<PostDTO> select() {
+    public ArrayList<PostDTO> selectListAll() {
         String sql = "select POST_NO, POSTER, POST_TITLE, POST_TIME from review_board order by 1";
         ArrayList<PostDTO> out = new ArrayList<>();
         try (

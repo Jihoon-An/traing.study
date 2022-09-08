@@ -194,7 +194,7 @@ public class Service {
     }
 
     static void outPostList() {
-        ArrayList<PostDTO> resultArr = boardDAO.select();
+        ArrayList<PostDTO> resultArr = boardDAO.selectListAll();
         if (resultArr.size() == 0) {
             System.out.println("글 목록이 존재하지 않습니다.");
         } else {
