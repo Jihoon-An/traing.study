@@ -1,14 +1,14 @@
 package jdbc.reviewBoard.dao;
 
 import jdbc.reviewBoard.dto.PostDTO;
+import org.apache.commons.dbcp2.BasicDataSource;
 
 import java.sql.*;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 public class ReviewBoardDAO {
-    private String dbID;
-    private String dbPW;
+    private String dbID = "review_board";
+    private String dbPW = "review";
     private String dbURL = "jdbc:oracle:thin:@localhost:1521:xe";
 
     public String getDbID() {
@@ -30,23 +30,46 @@ public class ReviewBoardDAO {
     public String getDbURL() {
         return dbURL;
     }
+    private BasicDataSource bds = new BasicDataSource();
 
     public void setDbURL(String dbURL) {
         this.dbURL = dbURL;
     }
 
-    public ReviewBoardDAO() {
+    private static ReviewBoardDAO instance = null;
+    public synchronized static ReviewBoardDAO getInstance(){
+        if(instance == null){
+            instance = new ReviewBoardDAO();
+        }
+        return instance;
+    }
+
+    private ReviewBoardDAO() {
+        this.bds.setUrl(dbURL);
+        this.bds.setUsername(dbID);
+        this.bds.setPassword(dbPW);
+        this.bds.setDriverClassName("oracle.jdbc.driver.OracleDriver");
+        this.bds.setInitialSize(30);
     }
 
     public ReviewBoardDAO(String dbID, String dbPW) {
         this.dbID = dbID;
         this.dbPW = dbPW;
+        this.bds.setUrl(dbURL);
+        this.bds.setUsername(dbID);
+        this.bds.setPassword(dbPW);
+        this.bds.setDriverClassName("oracle.jdbc.driver.OracleDriver");
+        this.bds.setInitialSize(30);
+    }
+
+    private Connection getConnection() throws Exception{
+        return bds.getConnection();
     }
 
     public int insert(PostDTO post) {
         String sql = "insert into review_board values(review_seq.nextval, ?, ?, ?, sysdate)";
         try (
-                Connection con = DriverManager.getConnection(dbURL, dbID, dbPW);
+                Connection con = getConnection();
                 PreparedStatement statement = con.prepareStatement(sql);
         ) {
             statement.setString(1, post.getPoster());
@@ -67,7 +90,7 @@ public class ReviewBoardDAO {
         String sql = "select POST_NO, POSTER, POST_TITLE, POST_TIME from review_board order by 1";
         ArrayList<PostDTO> out = new ArrayList<>();
         try (
-                Connection con = DriverManager.getConnection(dbURL, dbID, dbPW);
+                Connection con = getConnection();
                 PreparedStatement statement = con.prepareStatement(sql);
         ) {
             try (
@@ -93,7 +116,7 @@ public class ReviewBoardDAO {
     public PostDTO select(int findPostNo) {
         String sql = "select * from review_board where post_no = ?";
         try (
-                Connection con = DriverManager.getConnection(dbURL, dbID, dbPW);
+                Connection con = getConnection();
                 PreparedStatement statement = con.prepareStatement(sql);
         ) {
             statement.setInt(1, findPostNo);
@@ -120,7 +143,7 @@ public class ReviewBoardDAO {
     public int delete(int postNo) {
         String sql = "delete from review_board where post_no = ?";
         try (
-                Connection con = DriverManager.getConnection(dbURL, dbID, dbPW);
+                Connection con = getConnection();
                 PreparedStatement statement = con.prepareStatement(sql);
         ) {
             statement.setInt(1, postNo);
@@ -139,7 +162,7 @@ public class ReviewBoardDAO {
     public int update(PostDTO rePost) {
         String sql = "Update review_board set POSTER = ?, POST_TITLE = ?, POST_CONT = ? where POST_NO = ?";
         try (
-                Connection con = DriverManager.getConnection(dbURL, dbID, dbPW);
+                Connection con = getConnection();
                 PreparedStatement statement = con.prepareStatement(sql);
         ) {
             statement.setString(1, rePost.getPoster());
@@ -161,7 +184,7 @@ public class ReviewBoardDAO {
         String sql = "select POST_NO from review_board where (POST_TITLE like ?) or (POSTER like ?) order by POSTER";
         ArrayList<Integer> outStr = new ArrayList<>();
         try (
-                Connection con = DriverManager.getConnection(dbURL, dbID, dbPW);
+                Connection con = getConnection();
                 PreparedStatement statement = con.prepareStatement(sql);
         ) {
             statement.setString(1, "%" + searchText + "%");
@@ -181,5 +204,4 @@ public class ReviewBoardDAO {
             return null;
         }
     }
-
 }

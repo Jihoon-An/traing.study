@@ -7,16 +7,8 @@ import myCustom.Input;
 import java.util.ArrayList;
 
 public class Service {
-    private static String dbID = "review_board";
-    private static String dbPW = "review";
-
+    private static ReviewBoardDAO boardDAO = ReviewBoardDAO.getInstance();
     public static void service() {
-        try {
-            Class.forName("oracle.jdbc.driver.OracleDriver");
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-            System.exit(0);
-        }
 
         System.out.println("-------------------------메뉴얼-------------------------");
         System.out.println("1. 각 메뉴에서 0을 입력하면 메인 메뉴로 돌아갑니다.");
@@ -38,7 +30,6 @@ public class Service {
             int menu = Input._integer_(0, 6);
 
             if (menu == 1) { // 글 작성
-                ReviewBoardDAO boardDAO = new ReviewBoardDAO(dbID, dbPW);
 
                 System.out.println("작성자의 이름을 입력하세요");
                 String poster = Input._string_();
@@ -79,7 +70,6 @@ public class Service {
 
             } else if (menu == 4) { // 글 지우기
                 outPostList();
-                ReviewBoardDAO boardDAO = new ReviewBoardDAO(dbID, dbPW);
                 // 삭제 postNo 입력
                 System.out.println("----삭제할 글의 글 번호 입력----");
                 int delPostNo = Input._integer_();
@@ -105,7 +95,6 @@ public class Service {
                     System.out.println("메인 메뉴로 돌아갑니다.");
                 }
             } else if (menu == 5) { // 글 수정하기
-                ReviewBoardDAO boardDAO = new ReviewBoardDAO(dbID, dbPW);
                 outPostList();
                 // 수정 ID 입력
                 System.out.print("수정할 메뉴 ID 입력.");
@@ -177,7 +166,6 @@ public class Service {
                     System.out.println("수정 대상이 없습니다.");
                 }
             } else if (menu == 6) {
-                ReviewBoardDAO reviewBoardDAO = new ReviewBoardDAO(dbID, dbPW);
 
                 System.out.println("Search 대상을 입력하세요.(작성자와 게시글 제목에서 검색합니다.)");
                 String searchText = Input._string_(30);
@@ -185,12 +173,12 @@ public class Service {
                     System.out.println("메인 메뉴로 돌아갑니다.");
                     continue;
                 }
-                ArrayList<Integer> postNoArr = reviewBoardDAO.search(searchText);
+                ArrayList<Integer> postNoArr = boardDAO.search(searchText);
 
                 if(postNoArr.size() != 0) {
                     System.out.println("글 번호 \t: 작성자 \t: 글 제목 \t: 작성 시간");
                     for (int findPostNo : postNoArr) {
-                        PostDTO result = reviewBoardDAO.select(findPostNo);
+                        PostDTO result = boardDAO.select(findPostNo);
                         System.out.println(result.getPost_no()+ " \t: " + result.getPoster()+ " \t: " +result.getPost_title()+ "  \t: " +result.getPost_time_str());
                     }
                 }
@@ -206,7 +194,6 @@ public class Service {
     }
 
     static void outPostList() {
-        ReviewBoardDAO boardDAO = new ReviewBoardDAO(dbID, dbPW);
         ArrayList<PostDTO> resultArr = boardDAO.select();
         if (resultArr.size() == 0) {
             System.out.println("글 목록이 존재하지 않습니다.");
@@ -219,7 +206,6 @@ public class Service {
     }
 
     static void outPost(int findPostNo) {
-        ReviewBoardDAO boardDAO = new ReviewBoardDAO(dbID, dbPW);
         PostDTO result = boardDAO.select(findPostNo);
         if (result == null) {
             System.out.println("글 번호를 잘못 입력하셨습니다.");
