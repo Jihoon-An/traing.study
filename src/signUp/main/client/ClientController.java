@@ -2,7 +2,6 @@ package signUp.main.client;
 
 import java.io.*;
 import java.net.Socket;
-import java.util.ArrayList;
 
 public class ClientController {
     public static void service() {
@@ -14,12 +13,11 @@ public class ClientController {
              ObjectInputStream ois = new ObjectInputStream(is);
              ObjectOutputStream oos = new ObjectOutputStream(os);
         ) {
-
+            System.out.println("연결되었습니다.");
             while (true) {
                 int menuChoice = View.mainMenu();
                 dos.writeInt(menuChoice);
                 dos.flush();
-                Menu:
                 switch (menuChoice) {
                     case 1: // 로그인
                         oos.writeObject(View.signInMenu());

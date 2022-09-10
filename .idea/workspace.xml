@@ -3,15 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="e12c391d-8da7-49a7-bac1-ef473d7bacff" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/myCustom/Input.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/myCustom/Input.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/signUp/main/client/ClientController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/signUp/main/client/ClientController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/signUp/main/client/View.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/signUp/main/client/View.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/signUp/main/server/ServerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/signUp/main/server/ServerController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/signUp/main/server/ServerStarter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/signUp/main/server/ServerStarter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/signUp/main/server/dao/SignUpDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/signUp/main/server/dao/SignUpDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/signUp/main/server/dto/SignUpDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/signUp/main/model/SignUpDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/signUp/test/server/SignInTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/signUp/test/server/SignInTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/signUp/test/server/SignUpTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/signUp/test/server/SignUpTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,7 +57,7 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../KH-class-project" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
@@ -73,7 +67,33 @@
       <recent name="myCustom" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.SignInTest (1)">
+  <component name="RunManager" selected="Application.ClientStarter">
+    <configuration name="ClientStarter" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="signUp.main.client.ClientStarter" />
+      <module name="traning" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="signUp.main.client.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ServerStarter" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="signUp.main.server.ServerStarter" />
+      <module name="traning" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="signUp.main.server.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="SignInTest (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="signUp.test.server.SignInTest" />
       <module name="traning" />
@@ -113,39 +133,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="SignUpTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="server.test.SignUpTest" />
-      <module name="traning" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="signUp.test.server.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Starter" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="jdbc.reviewBoard.main.Starter" />
-      <module name="traning" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="jdbc.reviewBoard.main.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.ClientStarter" />
+        <item itemvalue="Application.ServerStarter" />
         <item itemvalue="Application.SignInTest (1)" />
         <item itemvalue="Application.SignUpTest (1)" />
         <item itemvalue="Application.SignInTest" />
-        <item itemvalue="Application.SignUpTest" />
-        <item itemvalue="Application.Starter" />
       </list>
     </recent_temporary>
   </component>
@@ -170,6 +164,16 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.net.SocketException" package="java.net" />
+          <option name="timeStamp" value="1" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

@@ -9,9 +9,9 @@ public class View {
         System.out.println("<<로그인 회원가입>>");
         System.out.println("1. 로그인");
         System.out.println("2. 회원가입");
-        System.out.println("3. 정보조회");
+//        System.out.println("3. 정보조회");
         System.out.println("0. 종료");
-        return Input._integer_(0,3);
+        return Input._integer_(0,2);
     }
 
     protected static SignUpDTO signInMenu(){

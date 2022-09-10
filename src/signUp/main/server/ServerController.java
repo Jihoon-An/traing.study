@@ -1,6 +1,5 @@
 package signUp.main.server;
 
-import signUp.main.client.View;
 import signUp.main.model.SignUpDTO;
 import signUp.main.server.dao.SignUpDAO;
 
@@ -20,16 +19,22 @@ public class ServerController {
                  ObjectInputStream ois = new ObjectInputStream(is);
                  ObjectOutputStream oos = new ObjectOutputStream(os);)
             {
+                System.out.println(socket.getInetAddress()+" 에서 접속하였습니다.");
                 SignUpDAO signUpDAO = SignUpDAO.getInstance();
                 while (true) {
                     int menuChoice = dis.readInt();
-                    Menu:
                     switch (menuChoice) {
                         case 1: // 로그인
-                            dos.writeUTF(signUpDAO.signInDAO((SignUpDTO) ois.readObject()));
+                            System.out.println(socket.getInetAddress()+" 에서 로그인을 시도합니다.");
+                            String inResult = signUpDAO.signInDAO((SignUpDTO) ois.readObject());
+                            System.out.println(inResult);
+                            dos.writeUTF(inResult);
                             break;
                         case 2: // 회원가입
-                            dos.writeUTF(signUpDAO.signUpDAO((SignUpDTO) ois.readObject()));
+                            System.out.println(socket.getInetAddress()+" 에서 회원가입을 시도합니다.");
+                            String upResult = signUpDAO.signUpDAO((SignUpDTO) ois.readObject());
+                            System.out.println(upResult);
+                            dos.writeUTF(upResult);
                             break;
                         case 0: // 프로그램 종료
                             oos.close();
@@ -44,9 +49,8 @@ public class ServerController {
                     }
                 }
             } catch (Exception e) {
-                System.out.println("오류가 발생하였습니다.");
+                System.out.println("접속이 끊어졌습니다.");
                 e.printStackTrace();
-                System.exit(0);
             }
         }
     }
