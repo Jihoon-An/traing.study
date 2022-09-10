@@ -1,7 +1,7 @@
 package signUp.test.server;
 
 import signUp.main.server.dao.SignUpDAO;
-import signUp.main.server.dto.SignUpDTO;
+import signUp.main.model.SignUpDTO;
 
 public class SignUpTest {
     public static void main(String[] args) throws Exception {

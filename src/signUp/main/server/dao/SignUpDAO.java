@@ -5,7 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 import org.apache.commons.dbcp2.BasicDataSource;
-import signUp.main.server.dto.SignUpDTO;
+import signUp.main.model.SignUpDTO;
 
 public class SignUpDAO {
 
@@ -45,59 +45,51 @@ public class SignUpDAO {
             pst.setString(2,dto.getUser_pw());
             pst.setString(3,dto.getUser_name());
 
-            int result = pst.executeUpdate();
+            int sqlResult = pst.executeUpdate();
 
-            String SignUp_truefalse;
-
-            if(result > 0) {
-                SignUp_truefalse="회원가입되셨습니다.";
+            if(sqlResult > 0) {
+                return "success";
             }else {
-                SignUp_truefalse="회원가입에 실패하였습니다.";
+                return "fail";
             }
-            return SignUp_truefalse;
         }
         catch (Exception e){
-            return "회원가입에 실패하였습니다.";
+            e.printStackTrace();
+            return "error";
         }
     }
 
 
 
-    public String signInDAO(SignUpDTO user) {
+    public String signInDAO(SignUpDTO trySignIn) {
         String sql = "select * from user_table where user_id = ?";
-        String output = "";
         try (
                 Connection con = getConnection();
                 PreparedStatement statement = con.prepareStatement(sql);
         ) {
-            statement.setString(1, user.getUser_id());
+            statement.setString(1, trySignIn.getUser_id());
             try (
-                    ResultSet result = statement.executeQuery();
+                    ResultSet sqlResult = statement.executeQuery();
             ) {
                 while(true) {
-                    if (result.next()) {
-                        if(user.getUser_id().equals(result.getString("user_id")))
+                    if (sqlResult.next()) {
+                        if(trySignIn.getUser_id().equals(sqlResult.getString("user_id")))
                         {
-                            if(user.getUser_pw().equals(result.getString("user_pw"))){
-                                return "로그인에 성공하였습니다.";
+                            if(trySignIn.getUser_pw().equals(sqlResult.getString("user_pw"))){
+                                return "success";
                             }
                             else{
-                                return "비밀번호가 일치하지 않습니다.";
+                                return "fail";
                             }
                         }
                     } else{
-                        return "존재하는 아이디가 없습니다.";
+                        return "notFoundId";
                     }
                 }
             }
         } catch (Exception e) {
             e.printStackTrace();
-            return "오류가 발생했습니다.:"+e.getMessage();
+            return "error";
         }
     }
-
-
-
-
-
 }

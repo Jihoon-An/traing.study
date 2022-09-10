@@ -7,7 +7,6 @@ public class Input {
         Scanner scanner = new Scanner(System.in);
         while (true) {
             try {
-                System.out.print(">>> ");
                 return Integer.parseInt(scanner.nextLine());
             } catch (Exception e) {
                 System.out.println("잘못된 입력입니다, 정수를 입력하세요.");
@@ -30,7 +29,6 @@ public class Input {
         Scanner scanner = new Scanner(System.in);
         while (true) {
             try {
-                System.out.print(">>> ");
                 return Double.parseDouble(scanner.nextLine());
             } catch (Exception e) {
                 System.out.println("잘못된 입력입니다, 정수를 입력하세요.");
@@ -51,7 +49,6 @@ public class Input {
 
     public static String _string_() {
         Scanner scanner = new Scanner(System.in);
-        System.out.print(">>> ");
         return scanner.nextLine();
     }
 
