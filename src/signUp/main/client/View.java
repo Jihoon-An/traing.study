@@ -32,7 +32,7 @@ public class View {
         }else if(result.equals("notFoundId")) {
             System.out.println("아이디를 찾을 수 없습니다.");
         }else{
-            System.out.println("오류가 발생했습니다.");
+            System.out.println("server오류가 발생했습니다.");
         }
     }
 
@@ -55,7 +55,7 @@ public class View {
             System.out.println("회원가입에 실패하였습니다.");
         }
         else{
-            System.out.println("오류가 발생하였습니다.");
+            System.out.println("server오류가 발생하였습니다.");
         }
     }
 
@@ -64,6 +64,6 @@ public class View {
     }
 
     protected static void error(){
-        System.out.println("오류가 발생하였습니다.");
+        System.out.println("client 발생하였습니다.");
     }
 }

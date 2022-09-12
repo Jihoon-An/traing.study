@@ -4,8 +4,9 @@
     <list default="true" id="e12c391d-8da7-49a7-bac1-ef473d7bacff" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/signUp/main/client/ClientController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/signUp/main/client/ClientController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/signUp/main/client/View.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/signUp/main/client/View.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/signUp/main/model/SignUpDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/signUp/main/model/SignUpDTO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/signUp/main/server/ServerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/signUp/main/server/ServerController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/signUp/main/server/ServerStarter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/signUp/main/server/ServerStarter.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,6 +22,14 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
   </component>
   <component name="GitToolBoxStore">
     <option name="recentBranches">
@@ -171,6 +180,10 @@
         <breakpoint enabled="true" type="java-exception">
           <properties class="java.net.SocketException" package="java.net" />
           <option name="timeStamp" value="1" />
+        </breakpoint>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.io.NotSerializableException" package="java.io" />
+          <option name="timeStamp" value="2" />
         </breakpoint>
       </breakpoints>
     </breakpoint-manager>

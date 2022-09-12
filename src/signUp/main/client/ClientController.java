@@ -1,48 +1,61 @@
 package signUp.main.client;
 
+import signUp.main.model.SignUpDTO;
+
 import java.io.*;
 import java.net.Socket;
 
 public class ClientController {
     public static void service() {
         System.out.println("service start");
-        try {
-            Socket client = new Socket("localhost", 25000);
-            System.out.println("Socket연결");
-            InputStream is = client.getInputStream();
-            OutputStream os = client.getOutputStream();
-            System.out.println("is, os 연결");
-            ObjectInputStream ois = new ObjectInputStream(is);
-            ObjectOutputStream oos = new ObjectOutputStream(os);
+        try (
+                Socket client = new Socket("localhost", 25000);
+                OutputStream os = client.getOutputStream();
+                InputStream is = client.getInputStream();
+                ObjectOutputStream oos = new ObjectOutputStream(os);
+                ObjectInputStream ois = new ObjectInputStream(is);
+                DataOutputStream dos = new DataOutputStream(os);
+                DataInputStream dis = new DataInputStream(is);
+        ) {
             System.out.println("object 연결");
+            SignUpDTO dto;
+            String resultMsg;
             while (true) {
                 int menuChoice = View.mainMenu();
                 oos.writeInt(menuChoice);
                 oos.flush();
                 switch (menuChoice) {
                     case 1: // 로그인
-                        oos.writeObject(View.signInMenu());
+                        dto = View.signInMenu();
+                        oos.writeObject(dto);
                         oos.flush();
-                        View.signInResult(ois.readUTF());
+                        resultMsg = dis.readUTF();
+                        View.signInResult(resultMsg);
                         break;
                     case 2: // 회원가입
-                        oos.writeObject(View.signUpMenu());
+                        dto = View.signUpMenu();
+                        oos.writeObject(dto);
                         oos.flush();
-                        View.signUpResult(ois.readUTF());
+                        resultMsg = dis.readUTF();
+                        View.signUpResult(resultMsg);
                         break;
                     case 0: // 프로그램 종료
-                        oos.close();
+                        dis.close();
+                        dos.close();
                         ois.close();
+                        oos.close();
                         is.close();
                         os.close();
                         client.close();
                         View.exit();
                         System.exit(0);
+                    default:
+                        throw new IllegalStateException("Unexpected value: " + menuChoice);
                 }
             }
         } catch (Exception e) {
             View.error();
-            e.printStackTrace();
+//            e.printStackTrace();
             System.exit(0);
         }
     }

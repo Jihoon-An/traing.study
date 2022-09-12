@@ -1,9 +1,11 @@
 package signUp.main.model;
 
-public class SignUpDTO {
-    private String user_id;
-    private String user_pw;
-    private String user_name;
+import java.io.Serializable;
+
+public class SignUpDTO implements Serializable {
+    private String user_id = "";
+    private String user_pw = "";
+    private String user_name = "";
 
     public SignUpDTO() {
     }
