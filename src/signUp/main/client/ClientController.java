@@ -5,19 +5,20 @@ import java.net.Socket;
 
 public class ClientController {
     public static void service() {
-        try (Socket client = new Socket("localhost", 25000);
-             InputStream is = client.getInputStream();
-             OutputStream os = client.getOutputStream();
-             DataInputStream dis = new DataInputStream(is);
-             DataOutputStream dos = new DataOutputStream(os);
-             ObjectInputStream ois = new ObjectInputStream(is);
-             ObjectOutputStream oos = new ObjectOutputStream(os);
-        ) {
-            System.out.println("연결되었습니다.");
+        System.out.println("service start");
+        try {
+            Socket client = new Socket("localhost", 25000);
+            System.out.println("Socket연결");
+            InputStream is = client.getInputStream();
+            OutputStream os = client.getOutputStream();
+            System.out.println("is, os 연결");
+            ObjectInputStream ois = new ObjectInputStream(is);
+            ObjectOutputStream oos = new ObjectOutputStream(os);
+            System.out.println("object 연결");
             while (true) {
                 int menuChoice = View.mainMenu();
-                dos.writeInt(menuChoice);
-                dos.flush();
+                oos.writeInt(menuChoice);
+                oos.flush();
                 switch (menuChoice) {
                     case 1: // 로그인
                         oos.writeObject(View.signInMenu());
@@ -32,8 +33,6 @@ public class ClientController {
                     case 0: // 프로그램 종료
                         oos.close();
                         ois.close();
-                        dos.close();
-                        dis.close();
                         is.close();
                         os.close();
                         client.close();
