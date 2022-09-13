@@ -32,14 +32,16 @@ public class ServerController {
                             readDto = (SignUpDTO)ois.readObject();
                             String inResult = signUpDAO.signInDAO(readDto);
                             System.out.println(inResult);
-                            dos.writeUTF(inResult);
+                            oos.writeUTF(inResult);
+                            oos.flush();
                             break;
                         case 2: // 회원가입
                             System.out.println(socket.getInetAddress() + " 에서 회원가입을 시도합니다.");
                             readDto = (SignUpDTO)ois.readObject();
                             String upResult = signUpDAO.signUpDAO(readDto);
                             System.out.println(upResult);
-                            dos.writeUTF(upResult);
+                            oos.writeUTF(upResult);
+                            oos.flush();
                             break;
                         case 0: // 프로그램 종료
                             dis.close();

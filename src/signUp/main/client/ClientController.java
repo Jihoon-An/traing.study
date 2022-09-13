@@ -14,8 +14,6 @@ public class ClientController {
                 InputStream is = client.getInputStream();
                 ObjectOutputStream oos = new ObjectOutputStream(os);
                 ObjectInputStream ois = new ObjectInputStream(is);
-                DataOutputStream dos = new DataOutputStream(os);
-                DataInputStream dis = new DataInputStream(is);
         ) {
             System.out.println("object 연결");
             SignUpDTO dto;
@@ -29,14 +27,14 @@ public class ClientController {
                         dto = View.signInMenu();
                         oos.writeObject(dto);
                         oos.flush();
-                        resultMsg = dis.readUTF();
+                        resultMsg = ois.readUTF();
                         View.signInResult(resultMsg);
                         break;
                     case 2: // 회원가입
                         dto = View.signUpMenu();
                         oos.writeObject(dto);
                         oos.flush();
-                        resultMsg = dis.readUTF();
+                        resultMsg = ois.readUTF();
                         View.signUpResult(resultMsg);
                         break;
                     case 0: // 프로그램 종료
